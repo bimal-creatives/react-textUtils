@@ -1,11 +1,36 @@
-import React, { PureComponent } from "react";
+import React, { useState } from "react"
 
-export default class About extends PureComponent {
-  render() {
-      let mystyle={
-        color:"red",
-        backgroundcolor:"black",
+
+export default function About() {
+  
+    
+  
+      const [mystyle, SetMystyle] = useState({
+        color:'black',
+        backgroundColor:'white',
+      })
+      
+      const [btntext, setBtntext] = useState("Enable Dark Mode")
+
+      const toggleStyle = ()=>{
+        if(mystyle.color === 'black'){
+          SetMystyle({
+            color: 'white',
+            backgroundColor: 'black',
+            border: '1px solid white' 
+          })
+          setBtntext("Enable Light Mode")
+        }
+        else{
+          SetMystyle({
+            color:'black',
+            backgroundColor:'white'
+          })
+          setBtntext("Enable Dark Mode");
+
+        }
       }
+
     return (
       <div className="container " style={mystyle} >
           <h1 className="my-3">About Us</h1>
@@ -19,6 +44,7 @@ export default class About extends PureComponent {
                 data-bs-target="#collapseOne"
                 aria-expanded="true"
                 aria-controls="collapseOne"
+                style={mystyle}
               >
                 Accordion Item #1
               </button>
@@ -112,11 +138,11 @@ export default class About extends PureComponent {
             </div>
           </div>
         </div>
-        <div className="container my-3 " style={mystyle}>
-            <button type="button" className="btn btn-primary "  >Enable Dark Mode</button>
+        <div className="container my-3 " >
+            <button onClick={toggleStyle} type="button" className="btn btn-danger "  >{btntext}</button>
         </div>
       </div>
       
     );
   }
-}
+
